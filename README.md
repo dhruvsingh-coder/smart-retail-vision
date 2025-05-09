@@ -1,35 +1,31 @@
-# YOLOv8 Product Detection and Object Counter
+# **YOLOv8 PRODUCT DETECTION AND OBJECT COUNTER**
 
-##  Project Overview
+## **PROJECT OVERVIEW**
 
-This project uses YOLOv8 (You Only Look Once version 8) for custom object detection and counting on a retail or structured environment dataset. The trained model identifies three classes: `Product-Name`, `Empty-Space`, and `Other-Product`, and exports detection counts to a JSON file. Ideal for shelf analysis, inventory tracking, and visual automation.
-
----
-
-##  Workflow Overview
-
-```mermaid
-flowchart TD
-    A[Start] --> B[Define paths and data.yaml]
-    B --> C[Train YOLOv8 model]
-    C --> D[Load trained model]
-    D --> E[Run prediction on test images]
-    E --> F[Parse prediction results]
-    F --> G[Count object classes]
-    G --> H[Export counts to final_counts.json]
-    H --> I[Download JSON (if in Colab)]
-    I --> J[End]
-```
+**This project utilizes YOLOv8 (You Only Look Once version 8) for training a custom object detection model. It identifies and counts three object classes — `Product-Name`, `Empty-Space`, and `Other-Product` — in retail shelf or structured environment images. It outputs a JSON file with the final counts.**
 
 ---
 
-##  Step-by-Step Explanation
+## **WORKFLOW OVERVIEW**
 
-### 1. **Training the Model**
+**1. Define paths and data.yaml**
+**2. Train YOLOv8 model**
+**3. Load trained model**
+**4. Run inference on test images**
+**5. Parse prediction results**
+**6. Count object classes**
+**7. Export counts to `final_counts.json`**
+**8. Optionally download the result (for Colab)**
 
-* The training uses a custom dataset defined in a `data.yaml` file.
-* Model used: `yolov8n.pt` (Nano version for faster training/testing)
-* Training parameters: 30 epochs, image size 640, batch size 16.
+---
+
+## **STEP-BY-STEP EXPLANATION**
+
+### **1. TRAINING THE MODEL**
+
+* **Dataset specified in `data.yaml`**
+* **Base model: `yolov8n.pt` (YOLOv8 nano)**
+* **Parameters: 30 epochs, 640 image size, batch size 16**
 
 ```python
 model.train(
@@ -41,36 +37,35 @@ model.train(
 )
 ```
 
-### 2. **Inference**
+### **2. INFERENCE**
 
-* After training, the best weights are loaded and used for predictions on the test dataset.
-* Inference is done using:
+* **Model uses best weights for inference**
 
 ```python
 results = model.predict(test_images_path, save=False)
 ```
 
-### 3. **Parsing Results and Counting**
+### **3. PARSING RESULTS & COUNTING**
 
-* The script loops through the prediction results, extracts the class indices, maps them to human-readable names, and counts the occurrences.
-* Uses `collections.Counter` to keep count.
+* **Class indices mapped to names using `class_names` list**
+* **`collections.Counter` used for tallying detections**
 
 ```python
 counts = Counter({name: 0 for name in class_names})
 ```
 
-### 4. **Exporting JSON**
+### **4. EXPORTING TO JSON**
 
-* The counts are saved to a `final_counts.json` file with readable indentation.
+* **Counts saved to a JSON file with proper formatting**
 
 ```python
 with open(output_json_path, 'w') as f:
     json.dump(counts, f, indent=4)
 ```
 
-### 5. **Colab Download (Optional)**
+### **5. OPTIONAL: DOWNLOAD IN COLAB**
 
-* If you're using Google Colab, the resulting JSON file can be downloaded directly:
+* **Directly download the JSON output**
 
 ```python
 files.download(output_json_path)
@@ -78,7 +73,7 @@ files.download(output_json_path)
 
 ---
 
-##  Folder Structure
+## **FOLDER STRUCTURE**
 
 ```
 project-root/
@@ -96,15 +91,15 @@ project-root/
 
 ---
 
-##  Classes Detected
+## **CLASSES DETECTED**
 
-1. **Product-Name**: Recognized items or known products on shelves.
-2. **Empty-Space**: Gaps on the shelf indicating no product.
-3. **Other-Product**: Misplaced or irrelevant products.
+* **Product-Name**: Recognized products on shelf
+* **Empty-Space**: Empty or gap regions
+* **Other-Product**: Irrelevant/misplaced products
 
 ---
 
-##  Requirements
+## **REQUIREMENTS**
 
 ```bash
 pip install ultralytics
@@ -115,7 +110,7 @@ pip install google-colab  # if using Colab
 
 ---
 
-##  Sample Output (`final_counts.json`)
+## **SAMPLE OUTPUT (`final_counts.json`)**
 
 ```json
 {
@@ -127,26 +122,28 @@ pip install google-colab  # if using Colab
 
 ---
 
-##  Use Cases
+## **USE CASES**
 
-* Retail shelf inventory analysis
-* Automated planogram compliance
-* Store stock-out detection
-* Intelligent merchandising insights
-
----
-
-##  License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+* **Retail shelf inventory analysis**
+* **Automated planogram compliance**
+* **Store stock-out detection**
+* **Visual merchandising insights**
 
 ---
 
-##  Future Improvements
+---
 
-* Integrate with a web dashboard for visualization
-* Add support for real-time webcam input
-* Improve model accuracy with larger datasets
-* Deploy as a REST API using FastAPI or Flask
+## **LICENSE**
+
+**MIT License - see the [LICENSE](LICENSE) file for details.**
+
+---
+
+## **FUTURE IMPROVEMENTS**
+
+* **Real-time webcam integration**
+* **Deploy as REST API (FastAPI/Flask)**
+* **Add dashboard visualizations**
+* **Improve with more training data**
 
 ---
