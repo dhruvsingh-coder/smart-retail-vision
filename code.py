@@ -24,7 +24,7 @@ output_json_path = 'final_counts.json'
 
 
 # Step 1: Load and Train the Model
-model = YOLO('yolov8n.pt')  # Using YOLOv8 nano model, can be changed
+model = YOLO('yolov8n.pt')  # Using YOLOv8 nano model
 
 # Train
 model.train(
