@@ -78,7 +78,7 @@ files.download(output_json_path)
 
 ---
 
-## 🗂 Folder Structure
+##  Folder Structure
 
 ```
 project-root/
@@ -127,7 +127,7 @@ pip install google-colab  # if using Colab
 
 ---
 
-## 📈 Use Cases
+##  Use Cases
 
 * Retail shelf inventory analysis
 * Automated planogram compliance
