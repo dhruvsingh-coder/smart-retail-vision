@@ -1,4 +1,4 @@
 ultralytics
 matplotlib
 opencv-python
-google-colab
+google-colab 
